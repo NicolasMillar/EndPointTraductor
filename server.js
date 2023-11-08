@@ -1,11 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 //coneccion a la base de datos;
 const pgp = require('pg-promise')();
-const connectionString = process.env.DB_URL; // Utiliza la variable de entorno DB_URL
+const connectionString = process.env.DB_URL; 
 const db = pgp(connectionString);
 
 app.use(express.json());
