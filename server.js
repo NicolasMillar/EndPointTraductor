@@ -41,9 +41,13 @@ app.use(express.json());
             res.status(500).json({ error: 'Ocurrió un error al obtener los datos de la tabla "traduccion"' });
         }
     });
-      
-app.use(cors());
 
-app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
-});
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
+};
+      
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
