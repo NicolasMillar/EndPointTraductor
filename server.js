@@ -29,7 +29,7 @@ app.use(express.json());
         try {
             if (id_idioma && origen) {
                 const query = `
-                    SELECT * FROM traduccion
+                    SELECT traduccion FROM traduccion
                     WHERE id_idioma = $1 AND origen = $2`;
                 
                 const idiomas = await db.any(query, [id_idioma, origen]);
