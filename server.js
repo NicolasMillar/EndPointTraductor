@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
+var cors = require('cors')
 const app = express();
 const port = process.env.PORT;
 
@@ -8,8 +8,12 @@ const port = process.env.PORT;
 const pgp = require('pg-promise')();
 const connectionString = process.env.DB_URL; 
 const db = pgp(connectionString);
+app.use(cors())
 
 app.use(express.json());
+app.listen(port, () => {
+    console.log(`Servidor escuchando en http://localhost:${port}`);
+});
 
 // Rutas de API
 
@@ -41,13 +45,3 @@ app.use(express.json());
             res.status(500).json({ error: 'Ocurrió un error al obtener los datos de la tabla "traduccion"' });
         }
     });
-
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    optionsSuccessStatus: 204,
-};
-      
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
