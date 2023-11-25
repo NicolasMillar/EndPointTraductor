@@ -31,6 +31,14 @@ app.listen(port, () => {
     //Endpoint que busca la traduccion segun el idioma y la palabra de origen
     app.get('/buscar', async(req, res) => {
         const { id_idioma, origen } = req.query;
+        if (!id_idioma) {
+            return res.status(400).json({ error: 'Debe seleccionar un idioma.' });
+        }
+        
+        if (!origen) {
+            return res.status(400).json({ error: 'Debe ingresar una palabra a traducir.' });
+        }
+
         try {
             if (id_idioma && origen) {
                 const query = `
