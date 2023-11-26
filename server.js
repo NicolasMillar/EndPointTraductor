@@ -46,6 +46,11 @@ app.listen(port, () => {
                     WHERE id_idioma = $1 AND origen = $2`;
                 
                 const idiomas = await db.any(query, [id_idioma, origen]);
+
+                if (idiomas.length === 0) {
+                    return res.status(404).json({ error: 'Lo sentimos, palabra no registrada en la base de datos.' });
+                }
+
                 res.json(idiomas);
             } 
         } catch (error) {
